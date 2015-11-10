@@ -9,7 +9,7 @@ public class Book implements Serializable {
 
 	private static final long serialVersionUID = -3409171233621036055L;
 
-	private String codigo, nome, editora, autor, edicao, seila;
+	private String codigo, nome, editora, autor, edicao;
     
     public Book(String codigo, String nome, String editora, String autor, String edicao) {
 		super();
