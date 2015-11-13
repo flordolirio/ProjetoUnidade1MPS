@@ -10,9 +10,7 @@ import business.util.LoginInvalidException;
 import business.util.PasswordInvalidException;
 public class FachadaComand {
 	private ComandPersistencia comand;
-	private UserManager userM;
-	private List<ComandPersistencia> listaComand;
-	
+	private UserManager userM;	
 	
 	public FachadaComand(String tipo, List<String> listaDados) throws LoginInvalidException, PasswordInvalidException, InfraException, IOException {
 		userM = UserManager.getInstancia();

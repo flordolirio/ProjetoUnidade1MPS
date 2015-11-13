@@ -4,7 +4,6 @@ package business.model;
 
 import java.io.Serializable;
 
-
 public class User implements Serializable {
 
 	private static final long serialVersionUID = -3409171233621036055L;
@@ -60,8 +59,15 @@ public class User implements Serializable {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-  
     
+    public UserMemento saveToMemento() { 
+		System.out.println("Originator: Saving to Memento.");
+		return new UserMemento(nome, matricula, curso, login, senha); 
+	}
+	public User restoreFromMemento(UserMemento m) {
+		return new User(m.getNome(), m.getMatricula(), m.getCurso(), m.getLogin(), m.getSenha());
+	}
+	
     public String toString(){
         return nome +"\n" +matricula+ "\n" +curso +"\n" + login +"\n"+senha;
     }

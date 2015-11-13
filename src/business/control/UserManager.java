@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import business.model.User;
+import business.model.UserZelador;
 import business.util.LoginInvalidException;
 import business.util.PasswordInvalidException;
 import business.util.UserValidador;
@@ -23,6 +24,8 @@ public class UserManager {
 	public static UserManager instancia; //Implementação do padrão Singleton
 	private FabricaDeAdapter fabrica;
 	private Persistencia adapter;
+	private UserZelador userZ;
+	private int i;
 
 	private UserManager(){
 		fabrica = new FabricaUserFileAdapter();//instancia a fabrica de usuários
@@ -85,14 +88,16 @@ public class UserManager {
 	}
 	public void atualizaUser(String login) throws InfraException, LoginInvalidException, FileNotFoundException, IOException {
 		entrada = new Scanner(System.in);
+		userZ = new UserZelador();
 		UserValidador.validateLogin(login);
 		// Check Existence
 		if (!UserValidador.validateUserExistence(users, login)){
 			throw new LoginInvalidException("Nenhum usuário foi encontrado com esse login.");
 		}
 		// Atualiza
-		for (int i=0; i < users.size(); i++){
+		for (i = 0; i < users.size(); i++){
 			if (login != null && login.equals(users.get(i).getLogin())){
+				userZ.addMemento(users.get(i).saveToMemento());//Aqui adiciona o memento ao zelador
 				System.out.println("Nome: ");
 				users.get(i).setNome(entrada.nextLine());
 				System.out.println("Matricula: ");
@@ -103,9 +108,28 @@ public class UserManager {
 				users.get(i).setLogin(entrada.nextLine());
 				System.out.println("Senha (entre 8 e 12 caracteres e pelo menos 1 caracter e 2 números): ");
 				users.get(i).setSenha(entrada.nextLine());
+				break;
 			}
 		}
 		adapter.save();
 		System.out.println("Usuario atualizado com sucesso!");
+		int escolha;
+		do{
+			System.out.println("Digite:\n1- Para desfazer atualização;\n2- Para continuar.");
+			escolha = entrada.nextInt();
+		}while(escolha<1||escolha>2);
+		if(escolha==1){
+			desfazer();	
+		}
 	}
+	
+	public void desfazer() throws InfraException, IOException{		
+		try {
+			users.set(i,users.get(i).restoreFromMemento(userZ.getMemento(0)));//aqui está desfazendo a ação de atualização
+			adapter.save();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}	
+	
 }
