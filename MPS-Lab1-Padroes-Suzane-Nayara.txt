@@ -1,0 +1,44 @@
+1 e 2) Adapter e Factory Method
+Classe Persistencia 
+Interface mãe das Adapter que contem as assinaturas dos métodos genéricos do ato de salvar e carregar do arquivo
+
+Classes BookFileAdapter e UserFileAdapter
+São classes filhas da classe Persistencia e são adaptadores da persistência de livros e de usuários respectivamente. Aqui os métodos de salvar e carregar são implementados chamando os métodos de salvar e carregar das classes UserFile e BookFile que possuem os métodos que realmente fazem a persistencia acontecer.
+
+Classe FabricaDeAdapter
+Interface mãe das Fábricas de adapter que contem a assinatura do métodos que instancia um objeto do tipo da fabrica escolhida
+
+Classe FabricaUserFileAdapter e FabricaBookFileAdapter
+São classes filhas da classe FabricaDeAdapter e são fábricas que instanciam os objetos UserFileAdapter e BookFileAdapter respectivamente.
+
+Classe BookManager e UserManager
+Classes que:
+instanciam as fábricas de livros e usuários;
+instanciam o adaptador de livro e usuário por meio da fábrica;
+e chama os métodos responsáveis por salvar e carregar dos adaptadores.
+
+3) Template Method
+Pacote view 
+Classe BookAddForm
+método opcaoCadLivro
+no case 2 da listagem tem um if-else que é responsável por escolher qual método de listagem será utilizado no Template Method
+
+Pacote business.control
+Classe MododeListagem
+Tem um enum onde são escolhidos os modos de listagem por autor ou por editora
+
+Classe Listagem
+Classe responsável por instanciar o método de listagem a ser usado e por mostrar a listagem
+
+Classe OrdenadorTemplate
+Classe que possui o método de ordenação dos livros e a assinatura do método que define qual será a ordenação também é a classe mãe das classes OrdenadorPorEditora e OrdenadorPorAutor
+
+Classe OrdenadorPorAutor
+Possui o método que define que a ordenação será por autor em ordem alfabética
+
+Classe OrdenadorPorEditora
+Possui o método que define que a ordenação será por autor em ordem alfabética
+
+4) Singleton
+Foi também implementado o padrão Singleton nas classes BookManager, UserManager, BookFile e UserFile para controle da instanciação de um objeto único para essas classes.
+
