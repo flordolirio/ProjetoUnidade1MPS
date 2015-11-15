@@ -32,7 +32,7 @@ public class UserAddForm {
 		int opMenu;
 		do{
 			System.out.println("\nEscolha a opção desejada:\n1- Cadastrar Usuario;\n2- Listar Usuários; \n3- Excluir Usuário;"
-					+ "\n4- Alterar Usuário;\n5- Voltar");
+					+ "\n4- Alterar Usuário;\n5- Desfazer última atualização; \n6- Voltar");
 			opMenu = opcao.nextInt();
 		}while(opMenu<1||opMenu>5);
 		opcaoCadUsuario(opMenu);			
@@ -117,8 +117,16 @@ public class UserAddForm {
 			
 			showMenuCadUsuario();
 			break;
-			
 		case 5:
+			try {
+				userF = new FachadaComand("desfazer", dadosUser);
+			} catch (LoginInvalidException | PasswordInvalidException | InfraException | IOException e) {
+				System.out.println(e.getMessage());
+			}
+			showMenuCadUsuario();
+			break;
+			
+		case 6:
 			voltar = true;
 		}
 	}

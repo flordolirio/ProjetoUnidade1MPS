@@ -113,14 +113,14 @@ public class UserManager {
 		}
 		adapter.save();
 		System.out.println("Usuario atualizado com sucesso!");
-		int escolha;
-		do{
-			System.out.println("Digite:\n1- Para desfazer atualização;\n2- Para continuar.");
-			escolha = entrada.nextInt();
-		}while(escolha<1||escolha>2);
-		if(escolha==1){
-			desfazer();	
-		}
+//		int escolha;
+//		do{
+//			System.out.println("Digite:\n1- Para desfazer atualização;\n2- Para continuar.");
+//			escolha = entrada.nextInt();
+//		}while(escolha<1||escolha>2);
+//		if(escolha==1){
+//			desfazer();	
+//		}
 	}
 	
 	public void desfazer() throws InfraException, IOException{		

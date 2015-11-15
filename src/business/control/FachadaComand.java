@@ -33,6 +33,10 @@ public class FachadaComand {
 		else if(tipo.equals("delete")){
 			comand = new DeleteComandPersist(userM);
 			comand.execute(listaDados);
-		}		
+		}
+		else if(tipo.equals("desfazer")){
+			comand = new DesfazComandPersist(userM);
+			comand.execute(listaDados);
+		}
 	}
 }
